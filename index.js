@@ -7,7 +7,7 @@ const bodyParser = require('body-parser');
 const authController = require ('./controller/auth');
 
 const app = express();
-const port = process.env.DB_PORT;
+const port = process.env.PORT;
 
 app.set('view engine', 'ejs');
 app.set('layout', './layouts/default/main');
