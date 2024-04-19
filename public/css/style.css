@@ -1,0 +1,66 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+body {
+    background-color: #f8f8f8;
+    /* Amarelo fosco */
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.box {
+    background-color: #fff;
+    /* Branco */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 300px;
+    /* Largura do formulário */
+}
+
+h1 {
+    color: #000;
+    /* Preto */
+    margin-bottom: 20px;
+}
+
+input[type="text"],
+input[type="date"],
+input[type="cpf"],
+button {
+    width: calc(100% - 22px);
+    /* Largura do input menos a borda */
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+button {
+    background-color: #ffa500;
+    /* Amarelo fosco */
+    color: #000;
+    /* Preto */
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #ffcc00;
+    /* Amarelo mais claro */
+}
