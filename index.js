@@ -6,6 +6,9 @@ const bodyParser = require('body-parser');
 // =========== Controller ===========
 const authController = require ('./controller/auth');
 
+// =========== Model ===========
+const Table = require('./model/registerModel');
+
 const app = express();
 const port = process.env.PORT;
 
@@ -23,6 +26,19 @@ app.get('/', (req,res) => {
 
 app.get('/auth', (req,res) => {
     authController.getAuth(req,res,app); 
+});
+
+app.post('/logado', (req,res) => {
+    Table.create({
+        name: req.body.name,
+        badge: req.body.badge,
+        date: req.body.date,
+        hour: req.body.hour
+    }).then(function(){
+        res.send("Registro efetuado com sucesso!");
+    }).catch(function(err){
+        res.send("Erro ao registrar: "+err);
+    });
 });
 
 app.listen(port, () => {
