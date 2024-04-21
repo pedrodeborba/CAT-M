@@ -55,7 +55,7 @@ app.post('/logado', (req, res) => {
                     res.send("Erro ao registrar acesso: " + err);
                 });
             } else {
-                res.send("Usuário não autorizado.");
+                res.render("layouts/default/main", { error: "Usuário não autorizado!" });
             }
         })
         .catch((error) => {
