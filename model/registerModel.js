@@ -6,7 +6,7 @@ const Register = db.sequelize.define('registers', {
         primaryKey: true,
         autoIncrement: true
     },
-    name: {
+    username: {
         type: db.Sequelize.STRING,
         allowNull: false
     },
@@ -23,6 +23,14 @@ const Register = db.sequelize.define('registers', {
         type: db.Sequelize.TIME,
         allowNull: false,
         defaultValue: db.Sequelize.literal('CURRENT_TIME')
+    },
+    users_id: {
+        type: db.Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+            model: 'users',
+            key: 'id'
+        }
     }
 }, {
     timestamps: false
