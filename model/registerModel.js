@@ -6,8 +6,8 @@ const Register = db.sequelize.define('registers', {
         primaryKey: true,
         autoIncrement: true
     },
-    username: {
-        type: db.Sequelize.STRING,
+    emission: {
+        type: db.Sequelize.DATEONLY,
         allowNull: false
     },
     badge: {

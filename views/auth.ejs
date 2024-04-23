@@ -1,15 +1,18 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-6 d-flex align-items-center text-center">
-            <form action="/logado" method="POST">
-                <h1>Registre-se</h1>
-                <input type="text" name="username" placeholder="Usuário" required>
+            <form action="/auth" method="POST">
+                <h1>Bem-vindo ao Totem</h1>
+                <p>Informe a data de emissão e número do seu crachá</p>
+                <input type="date" id="emission" name="emission" placeholder="Data de emissão" required>
                 <input type="text" name="badge" placeholder="Crachá" required>
                 <button type="submit">Continuar</button>
             </form>
             <% if (error) { %>
-                <p class="error-message"><%= error %></p>
-            <% } %>
+                <p class="error-message">
+                    <%= error %>
+                </p>
+                <% } %>
         </div>
         <div class="col-lg-6">
             <img src="/img/image.webp" alt="Image" style="border-radius: 30px;">

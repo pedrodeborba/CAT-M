@@ -1,3 +1,4 @@
+// index.js
 require('dotenv').config();
 const express = require('express');
 const expressLayouts = require('express-ejs-layouts');
@@ -29,22 +30,19 @@ app.get('/auth', (req, res) => {
     userController.getAuth(req, res, app);
 });
 
-app.post('/logado', (req, res) => {
-    const username = req.body.username;
-    const badge = req.body.badge;
+app.post('/auth', (req, res) => {
+    const { emission, badge } = req.body;
 
-    if (!username || !badge) {
+    if (!emission || !badge) {
         res.render("layouts/default/main", { error: "Preencha todos os campos" });
         return;
     }
 
-    // Verificar se o usuário existe
-    User.authenticate(username, badge)
+    User.authenticate(emission, badge)
         .then((user) => {
             if (user) {
-                // Criar um registro de acesso para o usuário
                 Table.create({
-                    username: user.username,
+                    emission: user.emission,
                     badge: user.badge,
                     date: new Date(),
                     hour: new Date().toLocaleTimeString(),
@@ -60,7 +58,7 @@ app.post('/logado', (req, res) => {
         })
         .catch((error) => {
             console.error(error);
-            res.send("Erro ao autenticar usuário.");
+            res.send("Erro ao autenticar usuário: " + error.message);
         });
 });
 

@@ -1,35 +1,41 @@
+// userController.js
 const User = require("../model/userModel");
 
-function getAuth(req, res, app){
+function getAuth(req, res, app) {
     app.set('layout', './layouts/default/main');
     res.render('auth', {error:null});
 }
 
 async function authenticate(req, res) {
-  const username = req.body.username;
-  const badge = req.body.badge;
+  const { emission, badge } = req.body;
 
-  if (!username || !badge) {
-    res.render("layouts/default/main", { error: "Preencha todos os campos" });
+  console.log("Dados recebidos:", emission, badge); // Adicionado para verificar se os dados estão corretos
+
+  // Verifica se algum dos campos está vazio
+  if (!emission || !badge) {
+      res.render("auth", { error: "Preencha todos os campos" });
+      return;
   }
 
-  User.authenticate(username, badge)
-    .then((user) => {
-      if (user) {
-        //Verificação bem sucedida
-        req.session.user = {
-          id: user.id,
-          username: user.username,
-        };
-        res.redirect("/logado");
-      } else {
-        res.render("auth", { error: "Credenciais inválidas" });
-      }
-    })
-    .catch((error) => {
-      console.error(error);
-      res.render("auth", { error: "Erro ao autenticar" });
-    });
+  // Autenticar o usuário fornecendo os parâmetros como um único objeto
+  User.authenticate(emission, badge)
+      .then((user) => {
+          if (user) {
+              // Verificação bem sucedida
+              req.session.user = {
+                  id: user.id,
+                  badge: user.badge,
+              };
+              res.redirect("/logado");
+          } else {
+              res.render("auth", { error: "Credenciais inválidas" });
+          }
+      })
+      .catch((error) => {
+          console.error(error);
+          res.render("auth", { error: "Erro ao autenticar" });
+      });
 }
 
-module.exports = { getAuth, authenticate};
+
+module.exports = { getAuth, authenticate };
