@@ -22,11 +22,7 @@ async function authenticate(req, res) {
       .then((user) => {
           if (user) {
               // Verificação bem sucedida
-              req.session.user = {
-                  id: user.id,
-                  badge: user.badge,
-              };
-              res.redirect("/logado");
+              res.redirect("/auth");
           } else {
               res.render("auth", { error: "Credenciais inválidas" });
           }

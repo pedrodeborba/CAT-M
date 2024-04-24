@@ -3,6 +3,7 @@ require('dotenv').config();
 const express = require('express');
 const expressLayouts = require('express-ejs-layouts');
 const bodyParser = require('body-parser');
+const port = process.env.PORT || 3000;
 
 // =========== Controller ===========
 const userController = require('./controller/userController');
@@ -11,9 +12,8 @@ const userController = require('./controller/userController');
 const Table = require('./model/registerModel');
 const User = require('./model/userModel');
 
+// =========== Default ===========
 const app = express();
-const port = process.env.PORT || 3000;
-
 app.set('view engine', 'ejs');
 app.set('layout', './layouts/default/main');
 app.use(expressLayouts);
@@ -21,6 +21,8 @@ app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
+// ================== Rotas ==================
 
 app.get('/', (req, res) => {
     res.redirect('/auth');
@@ -48,7 +50,7 @@ app.post('/auth', (req, res) => {
                     hour: new Date().toLocaleTimeString(),
                     users_id: user.id
                 }).then(() => {
-                    res.send("Registro de acesso efetuado com sucesso!");
+                    res.redirect(process.env.URL_REDIRECT);
                 }).catch(err => {
                     res.send("Erro ao registrar acesso: " + err);
                 });
