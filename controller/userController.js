@@ -7,21 +7,25 @@ function getAuth(req, res, app) {
 }
 
 async function authenticate(req, res) {
-  const { emission, badge } = req.body;
+  const { admission, badge } = req.body;
 
-  console.log("Dados recebidos:", emission, badge); // Adicionado para verificar se os dados estão corretos
+  console.log("Dados recebidos:", admission, badge); // Adicionado para verificar se os dados estão corretos
 
   // Verifica se algum dos campos está vazio
-  if (!emission || !badge) {
+  if (!admission || !badge) {
       res.render("auth", { error: "Preencha todos os campos" });
       return;
   }
 
   // Autenticar o usuário fornecendo os parâmetros como um único objeto
-  User.authenticate(emission, badge)
+  User.authenticate(admission, badge)
       .then((user) => {
           if (user) {
               // Verificação bem sucedida
+              req.session.user = {
+                  id: user.id,
+                  badge: user.badge,
+              };
               res.redirect("/auth");
           } else {
               res.render("auth", { error: "Credenciais inválidas" });

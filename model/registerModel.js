@@ -6,7 +6,7 @@ const Register = db.sequelize.define('registers', {
         primaryKey: true,
         autoIncrement: true
     },
-    emission: {
+    admission: {
         type: db.Sequelize.DATEONLY,
         allowNull: false
     },

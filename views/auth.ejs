@@ -1,21 +1,39 @@
 <div class="container">
     <div class="row">
-        <div class="col-lg-6 d-flex align-items-center text-center">
+        <div class="col-lg-6 d-flex justify-content-center align-items-center text-center">
             <form action="/auth" method="POST">
-                <h1>Bem-vindo ao Totem</h1>
-                <p>Informe a data de emissão e número do seu crachá</p>
-                <input type="date" id="emission" name="emission" placeholder="Data de emissão" required>
-                <input type="text" name="badge" placeholder="Crachá" required>
-                <button type="submit">Continuar</button>
+
+                <h1 id="title">Bem-vindo ao Totem</h1>
+
+                <label for="admission">Data de admissão</label>
+                <input type="date" id="admission" name="admission" placeholder="Data de emissão" required>
+
+                <label for="badge">Crachá</label>
+                <input type="number" name="badge" placeholder="Crachá" required>
+
+                <button id="button" type="submit">Continuar</button>
             </form>
             <% if (error) { %>
-                <p class="error-message">
+                <p id="error-message" class="hidden">
                     <%= error %>
                 </p>
                 <% } %>
         </div>
         <div class="col-lg-6">
-            <img src="/img/image.webp" alt="Image" style="border-radius: 30px;">
+            <img src="/img/Usaflex.png" alt="Image" style="border-radius: 30px;">
         </div>
     </div>
 </div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+    var errorMessage = document.getElementById('error-message');
+
+    // Exibe a mensagem de erro
+    errorMessage.classList.remove('hidden');
+
+    // Oculta a mensagem de erro após 3 segundos
+    setTimeout(function() {
+        errorMessage.classList.add('hidden');
+    }, 5000);
+});
+</script>

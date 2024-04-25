@@ -7,7 +7,7 @@ const User = db.sequelize.define('users', {
         primaryKey: true,
         autoIncrement: true
     },
-    emission: {
+    admission: {
         // Tipo de dado: data 0000-00-00 (sem hora)
         type: db.Sequelize.DATEONLY,
         allowNull: false
@@ -23,10 +23,10 @@ const User = db.sequelize.define('users', {
 });
 
 // Função de autenticação
-User.authenticate = function(emission, badge) {
+User.authenticate = function(admission, badge) {
     return User.findOne({ 
         where: { 
-            emission: emission,
+            admission: admission,
             badge: badge 
         }
     })

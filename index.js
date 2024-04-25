@@ -3,6 +3,7 @@ require('dotenv').config();
 const express = require('express');
 const expressLayouts = require('express-ejs-layouts');
 const bodyParser = require('body-parser');
+const session = require('express-session');
 const port = process.env.PORT || 3000;
 
 // =========== Controller ===========
@@ -22,6 +23,13 @@ app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+// ================== Session ==================
+app.use(session({
+    secret: process.env.SECRET,
+    resave: false,
+    saveUninitialized: true
+}));
+
 // ================== Rotas ==================
 
 app.get('/', (req, res) => {
@@ -33,18 +41,18 @@ app.get('/auth', (req, res) => {
 });
 
 app.post('/auth', (req, res) => {
-    const { emission, badge } = req.body;
+    const { admission, badge } = req.body;
 
-    if (!emission || !badge) {
+    if (!admission || !badge) {
         res.render("layouts/default/main", { error: "Preencha todos os campos" });
         return;
     }
 
-    User.authenticate(emission, badge)
+    User.authenticate(admission, badge)
         .then((user) => {
             if (user) {
                 Table.create({
-                    emission: user.emission,
+                    admission: user.admission,
                     badge: user.badge,
                     date: new Date(),
                     hour: new Date().toLocaleTimeString(),
@@ -55,7 +63,7 @@ app.post('/auth', (req, res) => {
                     res.send("Erro ao registrar acesso: " + err);
                 });
             } else {
-                res.render("layouts/default/main", { error: "Usuário não autorizado!" });
+                res.render("layouts/default/main", { error: "Usuário não autorizado! Para auxílio, contate a TI (Ramal 272)" });
             }
         })
         .catch((error) => {

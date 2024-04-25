@@ -1,18 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Jersey+15&display=swap');
 *{
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    font-family: "Jersey 15", sans-serif;
+    font-weight: 400;
+    font-style: normal;
 }
 
 img{
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
 }
 
 body {
-    background-color: #f8f8f8;
-    /* Amarelo fosco */
+    background-color: #ffd700;
+    background-image: linear-gradient(to right, #000, #5e5e5e, #ffd700);
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
@@ -20,6 +24,10 @@ body {
     align-items: center;
     justify-content: center;
     height: 100vh;
+}
+
+.col-lg-6{
+    padding: 10px;
 }
 
 .box {
@@ -33,13 +41,11 @@ body {
     /* Largura do formulário */
 }
 
-h1 {
-    color: #000;
-    /* Preto */
-    margin-bottom: 20px;
+#title{
+    color: #fff;
 }
 
-input[type="text"],
+input[type="number"],
 input[type="date"],
 input[type="cpf"],
 button {
@@ -48,19 +54,41 @@ button {
     padding: 10px;
     margin-bottom: 10px;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 10px;
     box-sizing: border-box;
 }
 
-button {
+#button {
     background-color: #ffa500;
-    /* Amarelo fosco */
     color: #000;
-    /* Preto */
     cursor: pointer;
+    border-radius: 10px;
+    border: none;
 }
 
 button:hover {
     background-color: #ffcc00;
     /* Amarelo mais claro */
+}
+
+.hidden {
+    display: none;
+}
+
+#error-message {
+    background-color: #ff6666;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    position: fixed;
+    top: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+label{
+    width: 100%; 
+    text-align-last: left; 
+    color: #fff; 
+    padding-left: 15px;
 }
