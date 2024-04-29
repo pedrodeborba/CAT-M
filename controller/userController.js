@@ -9,9 +9,8 @@ function getAuth(req, res, app) {
 async function authenticate(req, res) {
   const { admission, badge } = req.body;
 
-  console.log("Dados recebidos:", admission, badge); // Adicionado para verificar se os dados estão corretos
+  console.log("Dados recebidos:", admission, badge);
 
-  // Verifica se algum dos campos está vazio
   if (!admission || !badge) {
       res.render("auth", { error: "Preencha todos os campos" });
       return;
@@ -21,11 +20,7 @@ async function authenticate(req, res) {
   User.authenticate(admission, badge)
       .then((user) => {
           if (user) {
-              // Verificação bem sucedida
-              req.session.user = {
-                  id: user.id,
-                  badge: user.badge,
-              };
+              req.session.user = user;
               res.redirect("/auth");
           } else {
               res.render("auth", { error: "Credenciais inválidas" });

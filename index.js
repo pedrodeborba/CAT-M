@@ -12,6 +12,7 @@ const userController = require('./controller/userController');
 // =========== Model ===========
 const Table = require('./model/registerModel');
 const User = require('./model/userModel');
+const { name } = require('ejs');
 
 // =========== Default ===========
 const app = express();
@@ -52,8 +53,10 @@ app.post('/auth', (req, res) => {
         .then((user) => {
             if (user) {
                 Table.create({
+                    name: user.name,
                     admission: user.admission,
                     badge: user.badge,
+                    branch: user.branch,
                     date: new Date(),
                     hour: new Date().toLocaleTimeString(),
                     users_id: user.id

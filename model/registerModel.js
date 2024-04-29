@@ -6,6 +6,11 @@ const Register = db.sequelize.define('registers', {
         primaryKey: true,
         autoIncrement: true
     },
+    name: {
+        type: db.Sequelize.STRING,
+        allowNull: false,
+        unique: true
+    },
     admission: {
         type: db.Sequelize.DATEONLY,
         allowNull: false
@@ -23,6 +28,10 @@ const Register = db.sequelize.define('registers', {
         type: db.Sequelize.TIME,
         allowNull: false,
         defaultValue: db.Sequelize.literal('CURRENT_TIME')
+    },
+    branch: {
+        type: db.Sequelize.INTEGER,
+        allowNull: false
     },
     users_id: {
         type: db.Sequelize.INTEGER,

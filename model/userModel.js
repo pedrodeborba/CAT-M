@@ -7,6 +7,11 @@ const User = db.sequelize.define('users', {
         primaryKey: true,
         autoIncrement: true
     },
+    name: {
+        type: db.Sequelize.STRING,
+        allowNull: false,
+        unique: true
+    },
     admission: {
         // Tipo de dado: data 0000-00-00 (sem hora)
         type: db.Sequelize.DATEONLY,
@@ -16,7 +21,11 @@ const User = db.sequelize.define('users', {
         type: db.Sequelize.STRING,
         allowNull: false,
         unique: true // Garante que o crachá seja único
-    }
+    },
+    branch: {
+        type: db.Sequelize.INTEGER,
+        allowNull: false
+    },
 }, 
 {
     timestamps: false,
